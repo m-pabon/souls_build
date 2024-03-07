@@ -16,7 +16,7 @@ class IndexView(generic.ListView):
         Return the last five published questions (not including those set to be
         published in the future).
         """
-        return Weapon.objects.all()
+        return Weapon.objects.all().order_by('name')
 
 
 class DetailView(generic.DetailView):
