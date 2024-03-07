@@ -1,0 +1,52 @@
+{% extends 'souls_build/base.html' %} 
+{% block title %}Weapons | {{ weapon.name }}{%endblock %} 
+
+{% block content %}
+<div class="container">
+  <h1 class="mt-5">{{ weapon.name }}</h1>
+  <div class="row gx-5">
+    <div class="col-md-4 p-2">
+      <div class="image-container border border-warning-subtle p-2">
+        <img
+          src="https://res.cloudinary.com/dltueefi1/image/upload/souls-build/er/weapons/{{ updated_weapon_name }}.png"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="col-md-8 p-2 ps-5">
+      <div class="border-top border-warning-subtle pt-5">
+        <strong>Details: </strong>
+        <ul>
+          <li><strong>Weapon Type: </strong> {{ weapon.category }}</li>
+          <li><strong>Description: </strong> {{ weapon.description }}</li>
+          <li><strong>Weight: </strong> {{ weapon.weight }}</li>
+        </ul>
+        <strong>Attack Attributes: </strong>
+        <ul>
+          {% for attribute in weapon.attack_attributes.all %}
+          <li>{{ attribute.name }}: {{ attribute.amount }}</li>
+          {% endfor %}
+        </ul>
+        <strong>Defensive Attributes: </strong>
+        <ul>
+          {% for attribute in weapon.defense_attributes.all %}
+          <li>{{ attribute.name }}: {{ attribute.amount }}</li>
+          {% endfor %}
+        </ul>
+        <strong>Scalings: </strong>
+        <ul>
+          {% for scaling in weapon.scalings.all %}
+          <li>{{ scaling.name }}: {{ scaling.scaling }}</li>
+          {% endfor %}
+        </ul>
+        <strong>Required Attributes: </strong>
+        <ul>
+          {% for attribute in weapon.required_attributes.all %}
+          <li>{{ attribute.name }}: {{ attribute.amount }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

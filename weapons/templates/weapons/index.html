@@ -1,0 +1,15 @@
+{% extends 'souls_build/base.html' %} 
+{% block title%}Weapons{%endblock %} 
+
+{% block content %}
+<div class="container">
+  <h1 class="mt-5">Weapon Index</h1>
+  <ul>
+    {% for weapon in weapon_list %}
+    <li>
+      <a href="{% url 'weapons:detail' weapon.id %}">{{ weapon.name }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
