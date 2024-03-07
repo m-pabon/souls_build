@@ -3,11 +3,11 @@
 
 {% block content %}
 <div class="container">
-  <h1 class="mt-5">Weapon Index</h1>
-  <ul>
+  <h1 class="mt-5 mb-5">Weapon Index</h1>
+  <ul class="list-unstyled">
     {% for weapon in weapon_list %}
-    <li>
-      <a href="{% url 'weapons:detail' weapon.id %}">{{ weapon.name }}</a>
+    <li class="mb-4 border-bottom border-warning border-opacity-25">
+      <a class="text-decoration-none" href="{% url 'weapons:detail' weapon.id %}">{{ weapon.name }}</a>
     </li>
     {% endfor %}
   </ul>
