@@ -22,6 +22,7 @@ media
 
 # Development
 **/node_modules
+**/*.css
 .env
 .idea/
 *.sqlite3
