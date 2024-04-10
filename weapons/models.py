@@ -1,4 +1,5 @@
 from django.db import models
+from games.models import Game
 
 
 class Weapon(models.Model):
@@ -8,6 +9,7 @@ class Weapon(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=100)
     weight = models.IntegerField()
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='weapons', default='Elden Ring')
 
     def __str__(self):
         return self.name

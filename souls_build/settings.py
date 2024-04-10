@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [os.environ.get('RAILWAY_GENERATED_URL'), 'localhost', 'soulsbui
 # Application definition
 
 INSTALLED_APPS = [
+    "games.apps.GamesConfig",
     "weapons.apps.WeaponsConfig",
     'django.contrib.admin',
     'django.contrib.auth',
