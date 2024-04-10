@@ -21,6 +21,7 @@ db.sqlite3
 media
 
 # Development
+**/node_modules
 .env
 .idea/
 *.sqlite3

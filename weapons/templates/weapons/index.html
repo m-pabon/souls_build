@@ -1,4 +1,8 @@
-{% extends 'souls_build/base.html' %} 
+{% extends 'souls_build/base.html' %}
+{% load static %}
+{% block other_stylesheets %}
+    <link rel="stylesheet" href="{% static 'weapons/css/styles.css' %}" />
+{% endblock %}
 {% block title%}Weapons{%endblock %} 
 
 {% block content %}
