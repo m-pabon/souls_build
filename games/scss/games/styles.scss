@@ -1,7 +1,7 @@
 .game-card {
   & .card-img-top {
     width: 100%; /* makes the image responsive */
-    height: 200px; /* fixed height */
+    height: 300px; /* fixed height */
     object-fit: cover; /* keeps aspect ratio intact */
   }
   & .card-body {
