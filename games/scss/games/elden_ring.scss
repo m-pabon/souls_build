@@ -1,0 +1,13 @@
+.game-card{
+  background-color: #12171A;
+
+  & .card-img-top {
+    width: 100%; /* makes the image responsive */
+    height: 300px; /* fixed height */
+    object-fit: contain; /* keeps aspect ratio intact */
+  }
+
+  & .card-body {
+    background-color: #B1BECD;
+  }
+}
