@@ -1,12 +1,29 @@
-{% extends 'souls_build/base.html' %} {% block title %}Souls Build{%endblock %}
+{% extends 'souls_build/base.html' %}
+{% load static %}
+{% block other_stylesheets %}
+    <link rel="stylesheet" href="{% static 'games/css/styles.css' %}" />
+{% endblock %}
+{% block title %}Souls Build{% endblock %}
 {% block content %}
-<div class="container mt-5">
-  <h1 class="mb-3">Welcome to Souls Build!</h1>
-  <ul>
-      <li>
-          <a href="/weapons">Weapons Index</a>
-      </li>
-  </ul>
-   
-</div>
+    <div class="container mt-1 text-center p-5">
+        <h1 class="mb-5">SoulsBuild</h1>
+        {% for pair in games_pairs %}
+            <div class="row">
+                {% for game in pair %}
+                    <div class="col-md-6">
+                        <a href="{% url 'games:games' game.slug %}" class="text-decoration-none">
+                            <div class="card mb-3 game-card">
+                                <img src="{% static 'games/images/'|add:game.slug|add:'.jpeg' %}"
+                                     class="card-img-top img-fluid"
+                                     alt="{{ game.title }}">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ game.title }}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
