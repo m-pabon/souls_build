@@ -9,3 +9,11 @@
   }
 
 }
+
+@media (max-width: 576px){
+  .game-card {
+    & .card-img-top {
+      height: 200px;
+    }
+  }
+}
