@@ -11,7 +11,7 @@
             <div class="row">
                 {% for game in pair %}
                     <div class="col-lg-6">
-                        <a href="{% url 'games:games' game.slug %}" class="text-decoration-none">
+                        <a href="{% url 'games:game_detail' game.slug %}" class="text-decoration-none">
                             <div class="card mb-3 game-card">
                                 <img src="{% static 'games/images/'|add:game.slug|add:'.jpeg' %}"
                                      class="card-img-top img-fluid"

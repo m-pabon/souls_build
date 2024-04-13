@@ -1,9 +1,9 @@
-from django.urls import path
+from django.urls import include, path
 
 from . import views
 
 app_name = "games"
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("<str:game_slug>", views.game_detail, name="games")  # new URL pattern
+    path("<str:game_slug>/", views.game_detail, name="game_detail"),
+    path("<str:game_slug>/weapons/", include("weapons.urls"))
 ]

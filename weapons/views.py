@@ -1,38 +1,41 @@
-
 from django.views import generic
+from django.shortcuts import render, get_object_or_404
+from collections import OrderedDict
 
-# def index(request):
-#     return render(request, template_name="weapons/detail.html", context={})
 
 from .models import Weapon
 
 
-class IndexView(generic.ListView):
-    template_name = "weapons/index.html"
-    context_object_name = "weapon_list"
+def index_view(request, game_slug):
+    game_id = convert_game_id(game_slug)
 
-    def get_queryset(self):
-        """
-        Return the last five published questions (not including those set to be
-        published in the future).
-        """
-        return Weapon.objects.all().order_by('name')
+    categories = Weapon.objects.values_list('category', flat=True).distinct()
+
+    # Sort the categories
+    categories = sorted(categories)
+
+    weapons_by_category = OrderedDict()
+
+    for category in categories:
+        weapons = Weapon.objects.filter(game_id=game_id, category=category).order_by('name')
+        weapons_by_category[category] = list(weapons)
+
+    weapon_list = Weapon.objects.filter(game_id=game_id).order_by('name')
+    return render(request, "weapons/index.html",
+                  {"weapon_list": weapon_list, "game_slug": game_slug, "game_id": game_id, "weapons_by_category": weapons_by_category})
 
 
-class DetailView(generic.DetailView):
-    model = Weapon
-    template_name = "weapons/detail.html"
+def weapon_detail(request, game_slug, weapon_id):
+    weapon = get_object_or_404(Weapon, id=weapon_id)
+    updated_name = weapon.name.replace(' ', '_').replace("'", '_')
+    context = {
+        "weapon": weapon,
+        "updated_weapon_name": updated_name
+    }
+    return render(request, "weapons/detail.html", context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        obj = self.get_object()
 
-        # Replace space characters with underscores
-        updated_name = obj.name.replace(' ', '_')
-        # Replace ' characters with underscores
-        updated_name = updated_name.replace("'", '_')
-
-        # Add both versions of the weapon name to the context
-        context['weapon_name'] = obj.name
-        context['updated_weapon_name'] = updated_name
-        return context
+def convert_game_id(game_id):
+    if game_id == 'elden_ring':
+        game_id = 'Elden Ring'
+    return game_id

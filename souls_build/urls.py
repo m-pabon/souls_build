@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from . import views
+
 urlpatterns = [
-    path('', include("games.urls")),
-    path("weapons/", include("weapons.urls")),
+    path('', views.index, name="index"),
+    path("games/", include("games.urls")),
+    path("games/<str:game_slug>/weapons/", include("weapons.urls")),
     path('admin/', admin.site.urls),
 ]
