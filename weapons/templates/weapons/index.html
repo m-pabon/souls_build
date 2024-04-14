@@ -8,27 +8,27 @@
 {% block content %}
     <div class="container">
         <h1 class="mt-5 mb-5">{{ game_id }}: Weapons</h1>
-        {% for category, weapons in weapons_by_category.items %}
-            {% if forloop.counter0|divisibleby:2 %}
-                <div class="row mb-3">
+            {% for category, weapons in weapons_by_category.items %}
+                {% if forloop.counter0|divisibleby:2 %}
+                    <div class="row mb-3">
+                {% endif %}
+                <div class="col-lg-6">
+                    <h2 class="mb-4">{{ category }}</h2>
+                    <ul class="list-unstyled">
+                        {% for weapon in weapons %}
+                        <li class="mb-4 border-bottom border-warning border-opacity-25">
+                            <a class="text-decoration-none"
+                               href="{% url 'games:weapons:detail' game_slug=game_slug weapon_id=weapon.id %}">{{ weapon.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% if forloop.counter|divisibleby:2 %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% if not weapons_by_category.items|length|divisibleby:2 %}
+                </div>
             {% endif %}
-        <div class="col-lg-6">
-            <h2 class="mb-4">{{ category }}</h2>
-            <ul class="list-unstyled">
-                {% for weapon in weapons %}
-                <li class="mb-4 border-bottom border-warning border-opacity-25">
-                    <a class="text-decoration-none"
-                       href="{% url 'games:weapons:detail' game_slug=game_slug weapon_id=weapon.id %}">{{ weapon.name }}</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        {% if forloop.counter|divisibleby:2 %}
-            </div> <!-- Close the row div -->
-        {% endif %}
-        {% endfor %}
-        {% if not weapons_by_category.items|length|divisibleby:2 %}
-            </div> <!-- Close the row div if the number of categories is odd -->
-        {% endif %}
     </div>
 {% endblock %}
